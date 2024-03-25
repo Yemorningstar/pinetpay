@@ -1,0 +1,69 @@
+<?php
+
+// Hook to add admin menu for the settings page
+add_action('admin_menu', 'pinetpay_add_admin_page');
+
+// Function to add admin menu
+function pinetpay_add_admin_page() {
+    // Add a new submenu under Settings:
+    add_options_page(
+        'Pinetpay Settings', 
+        'Pinetpay', 
+        'manage_options', 
+        'pinetpay', 
+        'pinetpay_settings_page'
+    );
+}
+
+// Function to display the settings page content
+function pinetpay_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>Pinetpay</h1>
+        <form method="post" action="options.php">
+            <?php
+                settings_fields('pinetpay_settings_group');
+                do_settings_sections('pinetpay');
+                submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Hook to register settings, sections, and fields
+add_action('admin_init', 'pinetpay_register_settings');
+
+// Function to register settings
+function pinetpay_register_settings() {
+    // Register a new setting for "pinetpay" page.
+    register_setting('pinetpay_settings_group', 'pinetpay_pi_network_address');
+
+    // Register a new section in the "pinetpay" page.
+    add_settings_section(
+        'pinetpay_section_id', 
+        'General Settings', 
+        'pinetpay_section_callback', 
+        'pinetpay'
+    );
+
+    // Register a new field in the "pinetpay_section_id" section, inside the "pinetpay" page.
+    add_settings_field(
+        'pinetpay_pi_network_address_field', 
+        'Pi Network Address', 
+        'pinetpay_pi_network_address_callback', 
+        'pinetpay', 
+        'pinetpay_section_id'
+    );
+}
+
+// Callback function for the section description
+function pinetpay_section_callback() {
+    echo 'Enter your Pi Network address below. This address will be used to generate the QR code for payments.';
+}
+
+// Callback function for the Pi Network address field
+function pinetpay_pi_network_address_callback() {
+    $pi_network_address = get_option('pinetpay_pi_network_address');
+    echo '<input type="text" id="pinetpay_pi_network_address" name="pinetpay_pi_network_address" value="' . esc_attr($pi_network_address) . '" />';
+}

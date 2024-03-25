@@ -1,0 +1,38 @@
+/* Main container for the QR code, ensuring it's centered with some padding */
+#pinetpay-qr-code {
+    max-width: 200px; /* Adjust based on your QR code size */
+    margin: 20px auto; /* Center the QR code div */
+    padding: 15px;
+    background-color: #fff; /* Light background to contrast with the QR code */
+    border: 5px solid #99028C; /* Border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Styling for any title or instructions related to the QR code */
+.pinetpay-title,
+#pinetpay-instructions {
+    text-align: center; /* Center-align text */
+    color: #99028C; /* Use the brand color for emphasis */
+    font-size: 1.2em; /* Slightly larger text */
+    margin-bottom: 20px; /* Space before the QR code */
+}
+
+/* Button or link styling for copying the Pi address, if applicable */
+.button.pinetpay-copy-btn,
+a.pinetpay-copy-btn {
+    display: inline-block; /* Allows for margin and padding */
+    background-color: #99028C; /* Brand color */
+    color: #ffffff; /* White text */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px 20px; /* Padding inside the button */
+    border-radius: 5px; /* Rounded button edges */
+    margin-top: 20px; /* Space above the button */
+    cursor: pointer; /* Cursor to indicate it's clickable */
+    transition: background-color 0.3s; /* Smooth background color transition on hover */
+}
+
+.button.pinetpay-copy-btn:hover,
+a.pinetpay-copy-btn:hover {
+    background-color: #ba2a92; /* Darker shade on hover */
+}

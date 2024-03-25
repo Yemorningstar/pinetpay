@@ -1,0 +1,19 @@
+function pinetpay_add_checkout_qr_code() {
+    // Only proceed if the Pi Network address is set
+    $pi_network_address = get_option('pinetpay_pi_network_address');
+    if (empty($pi_network_address)) {
+        return;
+    }
+
+    // Placeholder for the QR code
+    echo '<div id="pinetpay-qr-code-placeholder"></div>';
+
+    // Enqueue the script responsible for generating the QR code, ensuring it's loaded on the checkout page
+    wp_enqueue_script('pinetpay-qr-generator');
+    
+    // Localize the script to pass the Pi Network address to JavaScript
+    wp_localize_script('pinetpay-qr-generator', 'pinetpayData', array(
+        'piAddress' => $pi_network_address,
+    ));
+}
+add_action('woocommerce_after_order_notes', 'pinetpay_add_checkout_qr_code');
